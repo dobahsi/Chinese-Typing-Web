@@ -12,7 +12,20 @@ const line4f = document.getElementById('line4f')
 const wrong = document.getElementById('wrong')
 var strv = '';
 
+// how many text in one line
+var  textnum = (window.getComputedStyle(paragraph).width.replace('px', '')/window.getComputedStyle(paragraph).fontSize.replace('px', '')).toFixed(0)
 
+// paragraph to multi arrays
+function paradataToText(para) {
+    var textarry = []
+    for (var i=0; i<para.length/textnum; i++){
+        textarry.push(para.slice(i*textnum, (i+1)*textnum))    
+    }
+    console.log(textarry[0]);
+}
+paradataToText(背影)
+
+//textarea press enter
 intext.addEventListener('keypress', function(e){
     if (e.key === 'Enter'){
         e.preventDefault();
@@ -20,17 +33,21 @@ intext.addEventListener('keypress', function(e){
         console.log(strv);
         // textcompare(strv);
     }
+    // setTimeout(()=>{console.log(intext.value, 't')},1)
 })
 
-function textcompare(t){
-    var p=0
-    while (p<textarry.length){
-        for (var i=0; i<t.length; i++){
-            if (t[i] == textarry[p][i]){
-                console.log('t')
-            } else {
-                console.log(t[i], paragraphdata.innerHTML[i])
-                wrong.innerHTML += `${paragraphdata.innerHTML.slice(i,i+1)} `
+//text compare
+function textcompare(instr){
+    var linenum = instr/textnum
+    for (var t=0; t<instr; t++){
+        for (var p=0; p<textarry.length; p++){
+            for (var i=0; i<t.length; i++){
+                if (t[i] == textarry[p][i]){
+                    console.log('t')
+                } else {
+                    console.log(t[i], paragraphdata.innerHTML[i])
+                    wrong.innerHTML += `${paragraphdata.innerHTML.slice(i,i+1)} `
+                }
             }
         }
     }
@@ -42,25 +59,13 @@ function textcompare(t){
 }
 
 // console.log([...Array(10)])
-var  textnum = (window.getComputedStyle(paragraph).width.replace('px', '')/window.getComputedStyle(paragraph).fontSize.replace('px', '')).toFixed(0)
-var textarry = []
-console.log(textnum)
-// console.log(背影.slice(0,textnum))
-console.log(背影.length)
 
-function paradataToText(para) {
-    for (var i=0; i<para.length/textnum; i++){
-        textarry.push(para.slice(i*textnum, (i+1)*textnum))    
-    }
-    console.log(textarry[0]);
-}
-paradataToText(背影)
 
-line1t.innerHTML = textarry[0].slice(0,2)
-line1f.innerHTML = textarry[0].slice(2)
-line2f.innerHTML = textarry[1]
-line3f.innerHTML = textarry[2]
-line4f.innerHTML = textarry[3]
+// line1t.innerHTML = textarry[0].slice(0,2)
+// line1f.innerHTML = textarry[0].slice(2)
+// line2f.innerHTML = textarry[1]
+// line3f.innerHTML = textarry[2]
+// line4f.innerHTML = textarry[3]
 
 
 
