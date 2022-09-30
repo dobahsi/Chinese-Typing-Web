@@ -57,7 +57,7 @@ nav{
 #lines{
     width: 100%;
     height: 135px;
-    overflow: auto;
+    overflow: hidden;
 }
 
 #lines div{

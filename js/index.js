@@ -65,6 +65,7 @@ intext.addEventListener('keypress', function(e){
         // textcompare(strv);
         // document.getElementById('line0').remove()
         lines.scrollBy({
+            //scroll (alltextinputed/textnum).floor()
             top: 45,
             behavior: 'smooth'
         })
