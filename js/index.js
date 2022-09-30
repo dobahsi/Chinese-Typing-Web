@@ -1,37 +1,73 @@
 const intext = document.getElementById('input-text')
 const mainwin = document.getElementById('main-window')
-const paragraph = document.getElementById('paragraph')
-const line1t = document.getElementById('line1t')
-const line1f = document.getElementById('line1f')
-const line2t = document.getElementById('line2t')
-const line2f = document.getElementById('line2f')
-const line3t = document.getElementById('line3t')
-const line3f = document.getElementById('line3f')
-const line4t = document.getElementById('line4t')
-const line4f = document.getElementById('line4f')
+const lines = document.getElementById('lines')
 const wrong = document.getElementById('wrong')
 var strv = '';
 
 // how many text in one line
-var  textnum = (window.getComputedStyle(paragraph).width.replace('px', '')/window.getComputedStyle(paragraph).fontSize.replace('px', '')).toFixed(0)
+var  textnum = (window.getComputedStyle(lines).width.replace('px', '')/window.getComputedStyle(lines).fontSize.replace('px', '')).toFixed(0)
 
 // paragraph to multi arrays
-function paradataToText(para) {
-    var textarry = []
-    for (var i=0; i<para.length/textnum; i++){
-        textarry.push(para.slice(i*textnum, (i+1)*textnum))    
+var textarry = []
+function paradataToText(paradata) {
+    for (var i=0; i<paradata.length; i++){
+        textarry.push(paradata.slice(i, i+1))    
     }
-    console.log(textarry[0]);
+    
+    var textrows = Math.ceil(textarry.length/textnum)
+    for (var r=0; r<textrows; r++) {
+        var divtag = document.createElement('div')
+        for (var c=0; c<textnum; c++) {
+            var ptag = document.createElement('p')
+            var ptext = document.createTextNode(textarry[0])
+            ptag.appendChild(ptext)
+            divtag.appendChild(ptag)
+            textarry.splice(0,1)
+
+            if (textarry[0] == undefined) {break}
+        }
+        divtag.setAttribute('id', `line${r}`)
+        divtag.setAttribute('class', 'lineclass')
+        lines.appendChild(divtag)
+    }
 }
 paradataToText(背影)
 
+
+// function textarryShow(arry) {
+//     for (var r=0; r<textrows; r++) {
+//         var divtag = document.createElement('div')
+//         for (var c=0; c<textnum; c++) {
+            
+//             var ptag = document.createElement('p')
+//             var ptext = document.createTextNode(arry[0])
+//             ptag.appendChild(ptext)
+//             divtag.appendChild(ptag)
+//             arry.splice(0,1)
+
+//             if (arry[0] == undefined) {break}
+//         }
+//         divtag.setAttribute('id', `line${r}`)
+//         lines.appendChild(divtag)
+//     }
+// }
+// textarryShow(textarry)
+
+
+// var tr = 3
+// console.log(document.getElementById(`line${tr}`).children[2].innerHTML);
 //textarea press enter
 intext.addEventListener('keypress', function(e){
     if (e.key === 'Enter'){
         e.preventDefault();
         strv = intext.value
-        console.log(strv);
+        // console.log(strv);
         // textcompare(strv);
+        // document.getElementById('line0').remove()
+        lines.scrollBy({
+            top: 45,
+            behavior: 'smooth'
+        })
     }
     // setTimeout(()=>{console.log(intext.value, 't')},1)
 })
@@ -67,5 +103,4 @@ function textcompare(instr){
 // line3f.innerHTML = textarry[2]
 // line4f.innerHTML = textarry[3]
 
-
-
+// console.log(document.getElementsByTagName('div'));
