@@ -61,12 +61,9 @@ intext.addEventListener('keypress', function(e){
     if (e.key === 'Enter'){
         e.preventDefault();
         strv = intext.value
-        // console.log(strv);
-        // textcompare(strv);
-        // document.getElementById('line0').remove()
         lines.scrollBy({
-            //scroll (alltextinputed/textnum).floor()
-            top: 45,
+            //scroll (alltextinputed/textnum).floor()lines
+            top: window.getComputedStyle(lines).lineHeight.replace('px', ''),
             behavior: 'smooth'
         })
     }
