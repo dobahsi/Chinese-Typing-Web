@@ -9,11 +9,14 @@ var  textnum = (window.getComputedStyle(lines).width.replace('px', '')/window.ge
 
 // paragraph to multi arrays
 var textarry = []
+var textlength
+var ps = []
 function paradataToText(paradata) {
     for (var i=0; i<paradata.length; i++){
-        textarry.push(paradata.slice(i, i+1))    
+        textarry.push(paradata.slice(i, i+1))
     }
-    
+    textlength = textarry.length
+
     var textrows = Math.ceil(textarry.length/textnum)
     for (var r=0; r<textrows; r++) {
         var divtag = document.createElement('div')
@@ -30,9 +33,10 @@ function paradataToText(paradata) {
         divtag.setAttribute('class', 'lineclass')
         lines.appendChild(divtag)
     }
+
+    ps = document.getElementsByTagName('p')
 }
 paradataToText(背影)
-
 
 // function textarryShow(arry) {
 //     for (var r=0; r<textrows; r++) {
@@ -68,7 +72,20 @@ intext.addEventListener('keypress', function(e){
         })
     }
     // setTimeout(()=>{console.log(intext.value, 't')},1)
+    console.log(document.getElementsByClassName('onspot'));
+    console.log(textlength);
+    for (var i=0; i<textlength; i++) {
+        console.log(i);
+        if (ps[i].classList.contains('onspot')) {
+            console.log(i);
+            ps[i].classList.remove('onspot')
+            ps[i+1].classList.add('onspot')
+            break
+        }
+    }
+
 })
+ps[1].classList.add('onspot')
 
 //text compare
 function textcompare(instr){

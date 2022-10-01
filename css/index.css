@@ -51,25 +51,38 @@ nav{
 
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
-#typingspot{
+/* #typingspot{
+    position: relative;
     width: 30px;
     height: 45px;
-    border-left: 3px solid var(--light);
-    position: absolute;
-}
+    
+    z-index: 100;
+    
+    
+    
+} */
 
 #lines{
     width: 100%;
     height: 135px;
     overflow: hidden;
+    /* transform: translate(0,-45px); */
+    
 }
 
 #lines div{
     display: flex;
+}
 
+.onspot{
+    border-left: 2px solid var(--light);
+    transition: ease;
+
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-name: typingspot;
 }
 
 .linef{
@@ -88,4 +101,12 @@ nav{
     padding: 0 20px 0;
     margin-top: 30px;
     overflow: hidden;
+    resize: none;
+}
+
+@keyframes typingspot{
+    0%{border-left: 2px solid var(--light);}
+    5%{border-left: 2px solid transparent;}
+    50%{border-left: 2px solid transparent;}
+    55%{border-left: 2px solid var(--light);}
 }
