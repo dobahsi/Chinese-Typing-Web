@@ -16,7 +16,9 @@
     --black: #222831;
     --dark: #393E46;
     --light: #FFD369;
+    --lightdark: #66542a;
     --white: #EEEEEE;
+    --wrong: #ff744f;
 }
 
 ::-webkit-scrollbar{
@@ -45,7 +47,7 @@ nav{
 #main-window{
     width: 640px;
     height: 175px;
-    padding: 12px;
+    padding: 12px 12px 12px 10px;
     border: 8px solid var(--light);
     overflow: auto;
 
@@ -53,23 +55,11 @@ nav{
     flex-direction: column;
 }
 
-/* #typingspot{
-    position: relative;
-    width: 30px;
-    height: 45px;
-    
-    z-index: 100;
-    
-    
-    
-} */
-
 #lines{
     width: 100%;
     height: 135px;
     overflow: hidden;
-    /* transform: translate(0,-45px); */
-    
+    padding-left: 2px;
 }
 
 #lines div{
@@ -78,22 +68,29 @@ nav{
 
 .onspot{
     border-left: 2px solid var(--light);
+    margin-left: -2px;
     transition: ease;
 
-    animation-duration: 1s;
+    /* animation-duration: 1s;
     animation-iteration-count: infinite;
-    animation-name: typingspot;
+    animation-name: typingspot; */
 }
 
-.linef{
-    color: var(--black);
+.finished{
+    color: var(--lightdark);
+    /* opacity: 0.3; */
 }
 
+.wrong{
+    color: var(--wrong);
+}
 
 /* input */
 #input-text{
     width: 640px;
+    height: 45px;
     background-color: transparent;
+    /* color: transparent; */
     /* box-sizing: inherit; */
     outline: none;
     border: none;
@@ -102,11 +99,12 @@ nav{
     margin-top: 30px;
     overflow: hidden;
     resize: none;
+    /* caret-color: transparent; */
 }
 
 @keyframes typingspot{
     0%{border-left: 2px solid var(--light);}
-    5%{border-left: 2px solid transparent;}
+    45%{border-left: 2px solid var(--light);}
     50%{border-left: 2px solid transparent;}
-    55%{border-left: 2px solid var(--light);}
+    95%{border-left: 2px solid transparent;}
 }
