@@ -70,17 +70,17 @@ intext.addEventListener('keydown', function(e){
 
             //line scroll
             if (psfn.length>=online*textnum) {
-                lines.scrollBy({
-                    top: 45,
+                lines.scroll({
+                    top: 45*(online-1),
                     behavior: 'smooth'
                 })
                 online++
             }else if (e.key === 'Backspace' && psfn.length<(online-1)*textnum){
-                lines.scrollBy({
-                    top: -45,
+                online-=1
+                lines.scroll({
+                    top: 45*(online-2),
                     behavior: 'smooth'
                 })
-                online-=1
             }
         }
     },10)
