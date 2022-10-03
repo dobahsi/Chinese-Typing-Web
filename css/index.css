@@ -28,31 +28,48 @@
 body{
     background-color: var(--dark);
 
-    display: flex;
+    display: grid;
+    grid-template-columns: [page-left] auto [main-left] 640px [main-right] auto [page-right];
+    grid-template-rows: [page-top] 70px [nav-end] 40px [set-end] 175px [main-end] 45px [page-down];
+    gap: 30px;
+
+    /* display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; */
 }
 
 nav{
-    width: 90vw;
-    height: 100px;
+    /* width: 90vw;
+    height: 100px; */
     
-    /* background-color: var(--light); */
-    margin-top: 30px;
+    grid-area: page-top / main-left / nav-end / main-right;
+    background-color: var(--light);
+    /* margin-top: 30px; */
     /* border: 8px solid var(--light); */
     border-radius: 20px;
 }
 
+#setting{
+    grid-area: nav-end / main-left / set-end / main-right;
+    background-color: #66542a;
+}
+
 /* main window */
+#center{
+    grid-area: set-end / main-left / main-end / main-right;
+}
+
 #main-window{
-    width: 640px;
-    height: 175px;
+    /* width: 640px;
+    height: 175px; */
     padding: 12px 12px 12px 10px;
     border: 8px solid var(--light);
     overflow: auto;
 
-    display: flex;
-    flex-direction: column;
+    
+
+    /* display: flex;
+    flex-direction: column; */
 }
 
 #lines{
