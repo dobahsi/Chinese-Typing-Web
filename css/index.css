@@ -73,6 +73,11 @@ nav{
     align-items: center;
 }
 
+#setting option{
+    background-color: var(--darkdark);
+    color: var(--darklighter);
+}
+
 #setting button, #setting select:hover{
     cursor: pointer;
 }
@@ -178,9 +183,33 @@ nav{
     /* caret-color: transparent; */
 }
 
-@keyframes typingspot{
-    0%{border-left: 2px solid var(--light);}
-    45%{border-left: 2px solid var(--light);}
-    50%{border-left: 2px solid transparent;}
-    95%{border-left: 2px solid transparent;}
+
+#end-screen{
+    grid-area: nav-end / main-left / input-end / main-right;
+    width: 100%;
+    background-color: var(--darkdark);
+    outline: 10px solid var(--darkdark);
+    border-radius: 20px;
+    padding: 50px;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#end-screen div{
+    color: var(--darklighter);
+    font-size: 20px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#end-screen span{
+    font-size: 50px;
+}
+
+.displaynone{
+    display: none !important;
 }

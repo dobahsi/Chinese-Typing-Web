@@ -6,11 +6,14 @@ const selpara = document.getElementById('select-para')
 const buttimer = document.getElementById('button-timer')
 const buttext = document.getElementById('button-text')
 const buts = document.getElementsByClassName('buts')
+const endscr = document.getElementById('end-screen')
+const time = document.getElementById('time')
+const rpm = document.getElementById('rpm')
+const acc = document.getElementById('acc')
 
 
 // how many text in one line
 var  textnum = (window.getComputedStyle(lines).width.replace('px', '')/window.getComputedStyle(lines).fontSize.replace('px', '')).toFixed(0)
-console.log(window.getComputedStyle(lines).width,window.getComputedStyle(lines).fontSize);
 
 // paragraph to multi arrays
 var textarry = []
@@ -21,7 +24,6 @@ function paradataToText(paradata) {
 
     textlength = textarry.length
     textrows = Math.ceil(textarry.length/textnum)
-    console.log(textlength);
 
     for (var r=0; r<textrows; r++) {
         var divtag = document.createElement('div')
@@ -55,7 +57,7 @@ intext.addEventListener('keydown', function(e){
             //finished
             psed = document.querySelectorAll('.onspot')
             psed.forEach(ed => {ed.classList.remove('onspot')})
-            ps[intext.value.length].classList.add('onspot')
+            if (intext.value.length !== ps.length){ps[intext.value.length].classList.add('onspot')}
             psfn = document.querySelectorAll('.finished')
             psfn.forEach(fn => {
                 fn.classList.remove('finished')
@@ -94,7 +96,6 @@ intext.addEventListener('keydown', function(e){
 })
 
 //buttons
-var selbuts
 function butclick(e) {
     if (e == 'timer') {
         buttimer.classList.add('button-selected')
@@ -121,55 +122,62 @@ function butclick(e) {
             }
         }
     }
+
     selbuts = document.getElementsByClassName('button-selected')
+    if (selbuts[1].id == 'button-text') {
+        var slicepara = paras[selpara.value].slice(0, selbuts[2].innerHTML*1)
+        paradataToText(slicepara)
+    } else if (selbuts[1].id == 'button-timer'){
+        paradataToText(paras[selpara.value])
+    }
 }
-    
-    
-    // else if (e == 'but1'){
-    //     but1.classList.add('button-selected')
-    //     but2.classList.remove('button-selected')
-    //     but3.classList.remove('button-selected')
-    //     but4.classList.remove('button-selected')
-    // }
-
-
-
-// //timer select
-// var timer = seltime.value*5*1000
-// function setTimer() {
-//     console.log(seltime.value);
-//     timer = seltime.value*5*1000
-// }
-// // setTimer()
 
 //timer start
 var correctnum = 0
 var wrongnum = 0
 var finaltext = []
 var finaltextcheck = []
-var timer = 0
+var timer, selbuts, totaltime
 intext.addEventListener("keydown", function() {
-    if (selbuts[1] == )
-    setInterval(() => {
-        timer++
-        console.log(timer);
-    }, 1000)
-})
+    selbuts = document.getElementsByClassName('button-selected')
+    timer = 0
+    if (selbuts[1].id == 'button-timer') {
+        timer = totaltime = selbuts[2].innerHTML
+        const countdown = setInterval(() => {
+            timer--
+            if (timer <= 0 || ps[ps.length-1].classList.contains('finished')) {
+                totaltime = totaltime - timer
+                endtyping()
+                clearInterval(countdown)
+            }
+        }, 1000)
 
-
-// intext.addEventListener("keydown", function() {
-//     console.log('start');
+    } else if (selbuts[1].id == 'button-text') {
+        const countup = setInterval(() => {
+            timer++
+            if (ps[ps.length-1].classList.contains('finished')){
+                endtyping()
+                clearInterval(countup)
+            }
+        }, 1000)
+    }
     
-//     setTimeout(() => {
-//         for (var i=0; i<intext.value.length; i++){finaltextcheck.push(intext.value[i])}
-//         finaltextcheck.forEach(v => {if (chicheck.test(v)) {finaltext.push(v)}})
-        
-//         for (var t=0; t<finaltext.length; t++) {
-//             if (finaltext[t] !== ps[t].innerHTML){wrongnum++}
-//             else if (finaltext[t] == ps[t].innerHTML){correctnum++}
-//         }
-//         console.log(finaltext, correctnum, wrongnum);
-        
-//     }, timer);
-// }, {once : true});
+}, {once : true})
 
+//end typing
+function endtyping() {
+    for (var i=0; i<intext.value.length; i++){finaltextcheck.push(intext.value[i])}
+        finaltextcheck.forEach(v => {if (chicheck.test(v)) {finaltext.push(v)}})
+    
+        for (var t=0; t<finaltext.length; t++) {
+            if (finaltext[t] !== ps[t].innerHTML){wrongnum++}
+            else if (finaltext[t] == ps[t].innerHTML){correctnum++}
+    }
+
+    if (selbuts[1].id == 'button-text') {totaltime = timer}
+    console.log(timer, finaltext, correctnum, wrongnum);
+    endscr.classList.remove('displaynone')
+    time.innerHTML = totaltime + 's'
+    rpm.innerHTML = (finaltext.length/(totaltime/60)).toFixed(0)
+    acc.innerHTML = (correctnum/(wrongnum+correctnum)*100).toFixed(0) + '%'
+}
