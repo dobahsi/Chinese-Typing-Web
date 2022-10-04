@@ -2,7 +2,14 @@ const intext = document.getElementById('input-text')
 const mainwin = document.getElementById('main-window')
 const lines = document.getElementById('lines')
 const wrong = document.getElementById('wrong')
-const seltime = document.getElementById('select-time')
+const selpara = document.getElementById('select-para')
+const buttimer = document.getElementById('button-timer')
+const buttext = document.getElementById('button-text')
+const but1 = document.getElementById('button1')
+const but2 = document.getElementById('button2')
+const but3 = document.getElementById('button3')
+const but4 = document.getElementById('button4')
+
 
 // how many text in one line
 var  textnum = (window.getComputedStyle(lines).width.replace('px', '')/window.getComputedStyle(lines).fontSize.replace('px', '')).toFixed(0)
@@ -86,14 +93,22 @@ intext.addEventListener('keydown', function(e){
     },10)
 })
 
-
-//timer select
-var timer = seltime.value*5*1000
-function setTimer() {
-    console.log(seltime.value);
-    timer = seltime.value*5*1000
+//buttons
+function butclick(e) {
+    console.log(e);
+    if (e == 'timer') {
+        console.log(buttimer);
+    }
 }
-// setTimer()
+
+
+// //timer select
+// var timer = seltime.value*5*1000
+// function setTimer() {
+//     console.log(seltime.value);
+//     timer = seltime.value*5*1000
+// }
+// // setTimer()
 
 //timer start
 var correctnum = 0
@@ -116,23 +131,3 @@ intext.addEventListener("keydown", function() {
     }, timer);
 }, {once : true});
 
-
-// //text compare
-// function textcompare(instr){
-//     var linenum = instr/textnum
-//     for (var t=0; t<instr; t++){
-//         for (var p=0; p<textarry.length; p++){
-//             for (var i=0; i<t.length; i++){
-//                 if (t[i] == textarry[p][i]){
-//                     console.log('t')
-//                 } else {
-//                     console.log(t[i], paragraphdata.innerHTML[i])
-//                     wrong.innerHTML += `${paragraphdata.innerHTML.slice(i,i+1)} `
-//                 }
-//             }
-//         }
-//     }
-//     finished.innerHTML += paragraphdata.innerHTML.slice(0,i)
-//     paragraphdata.innerHTML = paragraphdata.innerHTML.slice(i)
-//     // paragraphdata.innerHTML.replace = ''
-// }

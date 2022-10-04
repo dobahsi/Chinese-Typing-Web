@@ -20,16 +20,24 @@
     </nav>
 
     <div id="setting">
-        <!-- <select id="select-time" oninput="setTimer()">
-            <option value="1" selected>1 min.</option>
-            <option value="3">3 min.</option>
-            <option value="5">5 min.</option>
-            <option value="7">7 min.</option>
-        </select> -->
-        <input type="button" value="1">
-        <input type="button" value="3">
-        <input type="button" value="5">
-        <input type="button" value="7">
+        
+        <div id="setting-left">
+            <select id="select-para" class="button-selected" oninput="setTimer()">
+                <option value="紙船印象">紙船印象</option>
+                <option value="背影">背影</option>
+                <option value="隨機">隨機</option>
+            </select>
+            <button id="button-timer" class="button-selected" onclick="butclick('timer')"><img src="img/timer.svg" height="22px"></button>
+            <button id="button-text" onclick="butclick('text')"><img src="img/text.svg" height="22px"></button>
+        </div>
+
+        <div id="setting-right">
+            <button id="button1" class="button-selected" onclick="butclick('but1')">30</button>
+            <button id="button2" onclick="butclick('but2')">60</button>
+            <button id="button3" onclick="butclick('but3')">180</button>
+            <button id="button4" onclick="butclick('but4')">300</button>
+        </div>
+        
     </div>
 
     <div id="center">
