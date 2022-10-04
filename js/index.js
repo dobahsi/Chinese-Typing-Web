@@ -94,6 +94,7 @@ intext.addEventListener('keydown', function(e){
 })
 
 //buttons
+var selbuts
 function butclick(e) {
     if (e == 'timer') {
         buttimer.classList.add('button-selected')
@@ -120,7 +121,7 @@ function butclick(e) {
             }
         }
     }
-    console.log(document.getElementsByClassName('button-selected'));
+    selbuts = document.getElementsByClassName('button-selected')
 }
     
     
@@ -148,6 +149,7 @@ var finaltext = []
 var finaltextcheck = []
 var timer = 0
 intext.addEventListener("keydown", function() {
+    if (selbuts[1] == )
     setInterval(() => {
         timer++
         console.log(timer);
