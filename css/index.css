@@ -249,8 +249,4 @@ nav{
     body{
         grid-template-columns: [page-left] auto [main-left] 310px [main-right] auto [page-right];
     }
-
-    #end-screen span{
-        font-size: 20px;
-    }
 }
