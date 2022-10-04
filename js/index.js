@@ -178,6 +178,6 @@ function endtyping() {
     console.log(timer, finaltext, correctnum, wrongnum);
     endscr.classList.remove('displaynone')
     time.innerHTML = totaltime + 's'
-    rpm.innerHTML = (finaltext.length/(totaltime/60)).toFixed(0)
+    rpm.innerHTML = (correctnum/(totaltime/60)).toFixed(0)
     acc.innerHTML = (correctnum/(wrongnum+correctnum)*100).toFixed(0) + '%'
 }
