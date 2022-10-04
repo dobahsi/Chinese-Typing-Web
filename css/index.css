@@ -6,6 +6,7 @@
     font-weight: 500;
     color: var(--light);
     /* user-select: none; */
+    line-break: anywhere;
 }
 
 :root{
@@ -130,6 +131,7 @@ nav{
     height: 135px;
     overflow: hidden;
     padding-left: 2px;
+    font-size: 30px;
 }
 
 #lines div{

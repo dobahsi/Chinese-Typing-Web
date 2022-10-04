@@ -22,7 +22,7 @@
     <div id="setting">
         
         <div id="setting-left">
-            <select id="select-para" class="button-selected" oninput="setTimer()">
+            <select id="select-para" class="button-selected" oninput="paradataToText(paras[selpara.value])">
                 <option value="紙船印象">紙船印象</option>
                 <option value="背影">背影</option>
                 <option value="隨機">隨機</option>
@@ -32,10 +32,10 @@
         </div>
 
         <div id="setting-right">
-            <button id="button1" class="button-selected" onclick="butclick('but1')">30</button>
-            <button id="button2" onclick="butclick('but2')">60</button>
-            <button id="button3" onclick="butclick('but3')">180</button>
-            <button id="button4" onclick="butclick('but4')">300</button>
+            <button id="button1" class="buts button-selected" onclick="butclick('but1')">30</button>
+            <button id="button2" class="buts" onclick="butclick('but2')">60</button>
+            <button id="button3" class="buts" onclick="butclick('but3')">180</button>
+            <button id="button4" class="buts" onclick="butclick('but4')">300</button>
         </div>
         
     </div>

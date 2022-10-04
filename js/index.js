@@ -5,23 +5,23 @@ const wrong = document.getElementById('wrong')
 const selpara = document.getElementById('select-para')
 const buttimer = document.getElementById('button-timer')
 const buttext = document.getElementById('button-text')
-const but1 = document.getElementById('button1')
-const but2 = document.getElementById('button2')
-const but3 = document.getElementById('button3')
-const but4 = document.getElementById('button4')
+const buts = document.getElementsByClassName('buts')
 
 
 // how many text in one line
 var  textnum = (window.getComputedStyle(lines).width.replace('px', '')/window.getComputedStyle(lines).fontSize.replace('px', '')).toFixed(0)
+console.log(window.getComputedStyle(lines).width,window.getComputedStyle(lines).fontSize);
 
 // paragraph to multi arrays
 var textarry = []
 var textlength, textrows, ps
 function paradataToText(paradata) {
+    lines.innerHTML = ''
     for (var i=0; i<paradata.length; i++){textarry.push(paradata.slice(i, i+1))}
 
     textlength = textarry.length
     textrows = Math.ceil(textarry.length/textnum)
+    console.log(textlength);
 
     for (var r=0; r<textrows; r++) {
         var divtag = document.createElement('div')
@@ -40,7 +40,7 @@ function paradataToText(paradata) {
 
     ps = document.getElementsByTagName('p')
 }
-paradataToText(紙船印象)
+paradataToText(paras['紙船印象'])
 
 //textarea input words
 var online = 2
@@ -95,11 +95,42 @@ intext.addEventListener('keydown', function(e){
 
 //buttons
 function butclick(e) {
-    console.log(e);
     if (e == 'timer') {
-        console.log(buttimer);
+        buttimer.classList.add('button-selected')
+        buttext.classList.remove('button-selected')
+
+        buts[0].innerHTML = '30'
+        buts[1].innerHTML = '60'
+        buts[2].innerHTML = '180'
+        buts[3].innerHTML = '300'
+    }else if (e == 'text') {
+        buttext.classList.add('button-selected')
+        buttimer.classList.remove('button-selected')
+
+        buts[0].innerHTML = '20'
+        buts[1].innerHTML = '50'
+        buts[2].innerHTML = '100'
+        buts[3].innerHTML = '200'
+    }else{
+        for (var i=1; i<5; i++) {
+            if(e == 'but'+i){
+                buts[i-1].classList.add('button-selected')
+            }else{
+                buts[i-1].classList.remove('button-selected')
+            }
+        }
     }
+    console.log(document.getElementsByClassName('button-selected'));
 }
+    
+    
+    // else if (e == 'but1'){
+    //     but1.classList.add('button-selected')
+    //     but2.classList.remove('button-selected')
+    //     but3.classList.remove('button-selected')
+    //     but4.classList.remove('button-selected')
+    // }
+
 
 
 // //timer select
@@ -115,19 +146,28 @@ var correctnum = 0
 var wrongnum = 0
 var finaltext = []
 var finaltextcheck = []
+var timer = 0
 intext.addEventListener("keydown", function() {
-    console.log('start');
+    setInterval(() => {
+        timer++
+        console.log(timer);
+    }, 1000)
+})
+
+
+// intext.addEventListener("keydown", function() {
+//     console.log('start');
     
-    setTimeout(() => {
-        for (var i=0; i<intext.value.length; i++){finaltextcheck.push(intext.value[i])}
-        finaltextcheck.forEach(v => {if (chicheck.test(v)) {finaltext.push(v)}})
+//     setTimeout(() => {
+//         for (var i=0; i<intext.value.length; i++){finaltextcheck.push(intext.value[i])}
+//         finaltextcheck.forEach(v => {if (chicheck.test(v)) {finaltext.push(v)}})
         
-        for (var t=0; t<finaltext.length; t++) {
-            if (finaltext[t] !== ps[t].innerHTML){wrongnum++}
-            else if (finaltext[t] == ps[t].innerHTML){correctnum++}
-        }
-        console.log(finaltext, correctnum, wrongnum);
+//         for (var t=0; t<finaltext.length; t++) {
+//             if (finaltext[t] !== ps[t].innerHTML){wrongnum++}
+//             else if (finaltext[t] == ps[t].innerHTML){correctnum++}
+//         }
+//         console.log(finaltext, correctnum, wrongnum);
         
-    }, timer);
-}, {once : true});
+//     }, timer);
+// }, {once : true});
 
