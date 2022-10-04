@@ -230,8 +230,8 @@ nav{
         grid-template-columns: [page-left] auto [main-left] 430px [main-right] auto [page-right];
     }
 
-    #setting{
-        width: 100%;
+    #end-screen span{
+        font-size: 40px;
     }
 }
 
@@ -239,18 +239,10 @@ nav{
     body{
         grid-template-columns: [page-left] auto [main-left] 340px [main-right] auto [page-right];
     }
-
-    #setting{
-        width: 100%;
-    }
 }
 
 @media all and (max-width: 400px) {
     body{
         grid-template-columns: [page-left] auto [main-left] 310px [main-right] auto [page-right];
-    }
-
-    #setting{
-        width: 100%;
     }
 }
