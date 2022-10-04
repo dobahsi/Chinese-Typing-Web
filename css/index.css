@@ -65,6 +65,7 @@ nav{
 
 #setting button, #setting select{
     font-size: 18px;
+    line-height: 1;
     color: var(--darklight);
     background-color: transparent;
     border: none;
