@@ -51,7 +51,7 @@ nav{
 
 /* setting */
 #setting{
-    width: 500px;
+    width: calc(100% - 140px);
     grid-area: nav-end / main-left / set-end / main-right;
     background-color: var(--darkdark);
     border-radius: 10px;
@@ -212,4 +212,45 @@ nav{
 
 .displaynone{
     display: none !important;
+}
+
+@media all and (max-width: 700px) {
+    body{
+        grid-template-columns: [page-left] auto [main-left] 550px [main-right] auto [page-right];
+    }
+    
+    #setting{
+        width: 100%;
+    }
+}
+
+
+@media all and (max-width: 600px) {
+    body{
+        grid-template-columns: [page-left] auto [main-left] 430px [main-right] auto [page-right];
+    }
+
+    #setting{
+        width: 100%;
+    }
+}
+
+@media all and (max-width: 500px) {
+    body{
+        grid-template-columns: [page-left] auto [main-left] 340px [main-right] auto [page-right];
+    }
+
+    #setting{
+        width: 100%;
+    }
+}
+
+@media all and (max-width: 400px) {
+    body{
+        grid-template-columns: [page-left] auto [main-left] 310px [main-right] auto [page-right];
+    }
+
+    #setting{
+        width: 100%;
+    }
 }
