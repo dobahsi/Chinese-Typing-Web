@@ -5,6 +5,7 @@ const wrong = document.getElementById('wrong')
 const selpara = document.getElementById('select-para')
 const buttimer = document.getElementById('button-timer')
 const buttext = document.getElementById('button-text')
+const buttool = document.getElementById('button-tool')
 const buts = document.getElementsByClassName('buts')
 const endscr = document.getElementById('end-screen')
 const time = document.getElementById('time')
@@ -100,6 +101,7 @@ function butclick(e) {
     if (e == 'timer') {
         buttimer.classList.add('button-selected')
         buttext.classList.remove('button-selected')
+        buttool.classList.remove('button-selected')
 
         buts[0].innerHTML = '30'
         buts[1].innerHTML = '60'
@@ -108,11 +110,21 @@ function butclick(e) {
     }else if (e == 'text') {
         buttext.classList.add('button-selected')
         buttimer.classList.remove('button-selected')
+        buttool.classList.remove('button-selected')
 
         buts[0].innerHTML = '20'
         buts[1].innerHTML = '50'
         buts[2].innerHTML = '100'
         buts[3].innerHTML = '200'
+    }else if (e == 'tool') {
+        buttool.classList.add('button-selected')
+        buttimer.classList.remove('button-selected')
+        buttext.classList.remove('button-selected')
+
+        buts[0].innerHTML = '99'
+        buts[1].innerHTML = '99'
+        buts[2].innerHTML = '999'
+        buts[3].innerHTML = '999'
     }else{
         for (var i=1; i<5; i++) {
             if(e == 'but'+i){
@@ -127,7 +139,7 @@ function butclick(e) {
     if (selbuts[1].id == 'button-text') {
         var slicepara = paras[selpara.value].slice(0, selbuts[2].innerHTML*1)
         paradataToText(slicepara)
-    } else if (selbuts[1].id == 'button-timer'){
+    } else if (selbuts[1].id == 'button-timer' || selbuts[1].id == 'button-tool'){
         paradataToText(paras[selpara.value])
     }
 }
@@ -152,7 +164,7 @@ intext.addEventListener("keydown", function() {
             }
         }, 1000)
 
-    } else if (selbuts[1].id == 'button-text') {
+    } else if (selbuts[1].id == 'button-text' || selbuts[1].id == 'button-tool') {
         const countup = setInterval(() => {
             timer++
             if (ps[ps.length-1].classList.contains('finished')){
