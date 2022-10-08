@@ -24,6 +24,11 @@
     width: 0px;
 }
 
+/* ::selection{
+    color: var(--darkdark);
+    background-color: var(--light);
+} */
+
 body{
     background-color: var(--dark);
 
