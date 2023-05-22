@@ -150,7 +150,12 @@ var wrongnum = 0
 var finaltext = []
 var finaltextcheck = []
 var timer, selbuts, totaltime
-intext.addEventListener("keydown", function() {
+var running = 0
+
+function timerstart() {
+    console.log('start');
+    if (running == 1) {intext.removeEventListener("keydown", timerstart())}
+
     selbuts = document.getElementsByClassName('button-selected')
     timer = 0
     if (selbuts[1].id == 'button-timer') {
@@ -173,17 +178,23 @@ intext.addEventListener("keydown", function() {
             }
         }, 1000)
     }
-    
-}, {once : true})
+}
+
+if (running == 0) {
+    intext.addEventListener("keydown", timerstart())
+    running = 1
+}
 
 //end typing
 function endtyping() {
     for (var i=0; i<intext.value.length; i++){finaltextcheck.push(intext.value[i])}
-        finaltextcheck.forEach(v => {if (chicheck.test(v)) {finaltext.push(v)}})
-    
-        for (var t=0; t<finaltext.length; t++) {
-            if (finaltext[t] !== ps[t].innerHTML){wrongnum++}
-            else if (finaltext[t] == ps[t].innerHTML){correctnum++}
+    finaltextcheck.forEach(v => {if (chicheck.test(v)) {finaltext.push(v)}})
+    console.log(finaltext.length);
+    for (var t=0; t<finaltext.length; t++) {
+        if (!ps[t]) {break}
+        
+        if (finaltext[t] !== ps[t].innerHTML){wrongnum++}
+        else if (finaltext[t] == ps[t].innerHTML){correctnum++}
     }
 
     if (selbuts[1].id == 'button-text') {totaltime = timer}
@@ -192,4 +203,29 @@ function endtyping() {
     time.innerHTML = totaltime + 's'
     rpm.innerHTML = (correctnum/(totaltime/60)).toFixed(0)
     acc.innerHTML = (correctnum/(wrongnum+correctnum)*100).toFixed(0) + '%'
+}
+
+function restart() {
+    endscr.classList.add('displaynone')
+    intext.value = ''
+    butclick('but1')
+    online = 2
+    ps[0].classList.add('onspot')
+    psed = document.querySelectorAll('.onspot')
+    psed.forEach(ed => {ed.classList.remove('onspot')})
+    psfn = document.querySelectorAll('.finished')
+    psfn.forEach(fn => {
+        fn.classList.remove('finished')
+        fn.classList.remove('wrong')
+    })
+    for (var i=0; i<ps.length; i++) {ps[i].classList.remove('finished')}
+    psfn = document.querySelectorAll('.finished')
+    timer = 0
+    correctnum = 0
+    wrongnum = 0
+    finaltext = []
+    finaltextcheck = []
+    totaltime = 0
+    running = 0
+    intext.addEventListener("keydown", timerstart())
 }

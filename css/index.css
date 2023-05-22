@@ -34,7 +34,7 @@ body{
 
     display: grid;
     grid-template-columns: [page-left] auto [main-left] 640px [main-right] auto [page-right];
-    grid-template-rows: [page-top] 70px [nav-end] 40px [set-end] 175px [main-end] 45px [input-end] auto [page-down];
+    grid-template-rows: [page-top] 70px [nav-end] 40px [set-end] 175px [main-end] 45px [input-end] 40px [button-end] auto [page-down];
     justify-items: center;
     gap: 30px;
 
@@ -189,7 +189,21 @@ nav{
     /* caret-color: transparent; */
 }
 
+/* restart button */
+#button-restart {
+    grid-area: input-end / main-left / button-end / main-right;
+    width: 200px;
+    height: 100%;
+    background-color: var(--darkdark);
+    border: 0;
+    border-radius: 10px;
+    font-size: 18px;
+    color: var(--darklighter);
+    cursor: pointer;
+    /* font-weight: 700; */
+}
 
+/* end screen */
 #end-screen{
     grid-area: nav-end / main-left / input-end / main-right;
     width: 100%;
@@ -203,6 +217,7 @@ nav{
     justify-content: space-around;
     align-items: center;
 }
+
 
 #end-screen div{
     color: var(--darklighter);
