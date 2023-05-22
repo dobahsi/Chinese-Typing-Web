@@ -213,6 +213,7 @@ function restart() {
     ps[0].classList.add('onspot')
     psed = document.querySelectorAll('.onspot')
     psed.forEach(ed => {ed.classList.remove('onspot')})
+    psed[0].classList.add('onspot')
     psfn = document.querySelectorAll('.finished')
     psfn.forEach(fn => {
         fn.classList.remove('finished')
