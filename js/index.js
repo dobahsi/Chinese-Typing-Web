@@ -150,40 +150,50 @@ var wrongnum = 0
 var finaltext = []
 var finaltextcheck = []
 var timer, selbuts, totaltime
-var running = 0
+
+var running = false
+intext.addEventListener("keydown", () => {
+    if (!running) {
+        timerstart()
+        running = true
+    }
+})
+
 
 function timerstart() {
     console.log('start');
-    if (running == 1) {intext.removeEventListener("keydown", timerstart())}
 
     selbuts = document.getElementsByClassName('button-selected')
     timer = 0
-    if (selbuts[1].id == 'button-timer') {
-        timer = totaltime = selbuts[2].innerHTML
-        const countdown = setInterval(() => {
-            timer--
-            if (timer <= 0 || ps[ps.length-1].classList.contains('finished')) {
-                totaltime = totaltime - timer
-                endtyping()
-                clearInterval(countdown)
-            }
-        }, 1000)
+    while (running) {
+        console.log('run');
+        if (selbuts[1].id == 'button-timer') {
+            timer = totaltime = selbuts[2].innerHTML
+            const countdown = setInterval(() => {
+                timer--
+                if (timer <= 0 || ps[ps.length-1].classList.contains('finished')) {
+                    totaltime = totaltime - timer
+                    endtyping()
+                    clearInterval(countdown)
+                }
+                console.log(timer);
+            }, 1000)
 
-    } else if (selbuts[1].id == 'button-text' || selbuts[1].id == 'button-tool') {
-        const countup = setInterval(() => {
-            timer++
-            if (ps[ps.length-1].classList.contains('finished')){
-                endtyping()
-                clearInterval(countup)
-            }
-        }, 1000)
+        } else if (selbuts[1].id == 'button-text' || selbuts[1].id == 'button-tool') {
+            const countup = setInterval(() => {
+                timer++
+                if (ps[ps.length-1].classList.contains('finished')){
+                    endtyping()
+                    clearInterval(countup)
+                }
+                console.log(timer);
+
+            }, 1000)
+        }
     }
+    
 }
 
-if (running == 0) {
-    intext.addEventListener("keydown", timerstart())
-    running = 1
-}
 
 //end typing
 function endtyping() {
@@ -227,6 +237,6 @@ function restart() {
     finaltext = []
     finaltextcheck = []
     totaltime = 0
-    running = 0
-    intext.addEventListener("keydown", timerstart())
+    running = false
+    intext.focus()
 }
